@@ -1,9 +1,4 @@
 .search-container {
-  .active {
-    color: white;
-    background-color: blue;
-  }
-
   .navigation-menu {
     display: flex;
     flex-direction: column;
@@ -39,7 +34,19 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 8px;
-    border: 1px solid red;
+
+    .pagination-container {
+      background-color: #3e3e40;
+      border-radius: 8px;
+
+      button {
+        color: white;
+
+        &[aria-current=true] {
+          background-color: #565659;
+        }
+      }
+    }
 
     span {
       text-align: right;

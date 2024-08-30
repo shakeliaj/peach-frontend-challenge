@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Navigate, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import Pagination from '@mui/material/Pagination'
 
 import SearchInput from '../../components/searchInput/SearchInput'
 import MovieCard from '../../components/movieCard/MovieCard'
@@ -53,19 +54,17 @@ const Search = () => {
 
   const getPagination = useCallback(() => {
     const totalPages = totalResults ? Math.ceil(parseInt(totalResults) / 10) : 0
-    const pages = []
-    for (let page = 1; page <= totalPages; page++) {
-      pages.push(
-        <button
-          key={`page-${page}`}
-          onClick={() => setCurrentPage(page)}
-          className={currentPage === page ? styling.active : ''}
-        >
-          {page}
-        </button>
-      )
-    }
-    return <div className={styling['pagination-container']}>{pages}</div>
+
+    return (
+      <Pagination
+        page={currentPage}
+        count={totalPages}
+        color='primary'
+        size='large'
+        className={styling['pagination-container']}
+        onChange={(event, value) => setCurrentPage(value)}
+      />
+    )
   }, [totalResults, currentPage])
 
   const getMovieCards = useCallback(() => (
