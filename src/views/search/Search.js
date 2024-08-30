@@ -3,6 +3,8 @@ import { Navigate, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
 import SearchInput from '../../components/searchInput/SearchInput'
+import MovieCard from '../../components/movieCard/MovieCard'
+import { ReactComponent as PeachLogo } from '../../images/peach-logo.svg'
 
 import { getMoviesBySearch } from '../../services/movieService'
 
@@ -12,7 +14,7 @@ const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const [movieList, setMovieList] = useState([])
-  const [totalPages, setTotalPages] = useState(0)
+  const [totalResults, setTotalResults] = useState(0)
   const [currentPage, setCurrentPage] = useState(1)
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -29,7 +31,7 @@ const Search = () => {
       } = await getMoviesBySearch({ pageNum: currentPage, searchTerm })
 
       setMovieList(movies || [])
-      setTotalPages(totalResults ? Math.ceil(parseInt(totalResults) / 10) : 0)
+      setTotalResults(totalResults || 0)
       setErrorMessage(error || '')
     }
 
@@ -50,6 +52,7 @@ const Search = () => {
   }, [currentPage, searchParams, setSearchParams])
 
   const getPagination = useCallback(() => {
+    const totalPages = totalResults ? Math.ceil(parseInt(totalResults) / 10) : 0
     const pages = []
     for (let page = 1; page <= totalPages; page++) {
       pages.push(
@@ -62,21 +65,45 @@ const Search = () => {
         </button>
       )
     }
-    return pages
-  }, [totalPages, currentPage])
+    return <div className={styling['pagination-container']}>{pages}</div>
+  }, [totalResults, currentPage])
+
+  const getMovieCards = useCallback(() => (
+    movieList?.map((item, index) => (
+      <MovieCard key={`${item.Title}-${index}`} {...item} />
+    ))
+  ), [movieList])
 
   return (
     <>
       {!searchTerm ? <Navigate to='/' /> : (
-        <>
-          <div>
-            <p>search</p>
-            <SearchInput defaultValue={searchTerm} onSearch={() => setCurrentPage(1)} />
+        <div className={styling['search-container']}>
+          <div className={styling['navigation-menu']}>
+            <PeachLogo />
+            <SearchInput
+              defaultValue={searchTerm}
+              onSearch={() => setCurrentPage(1)}
+              className={styling['search-input']}
+            />
           </div>
-          {movieList?.map((item, index) => <div key={`${item.Title}-${index}`}>{item.Title}</div>)}
-          {errorMessage && <p>Error: {errorMessage}</p>}
-          {getPagination()}
-        </>
+          {movieList?.length ? (
+            <div className={styling['content-container']}>
+              <h2>{`Search results for "${searchTerm}"`}</h2>
+              <div className={styling['movies-container']}>
+                {getMovieCards()}
+              </div>
+              <div className={styling['results-container']}>
+                {getPagination()}
+                <span>{movieList?.length} of {totalResults} results</span>
+              </div>
+            </div>
+          ) : null}
+          {errorMessage ? (
+            <div className={styling['error-container']}>
+              <p>{errorMessage}<br />Please update your search criteria and try again.</p>
+            </div>
+          ) : null}
+        </div >
       )
       }
     </>

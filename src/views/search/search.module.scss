@@ -1,4 +1,98 @@
-.active {
-  color: white;
-  background-color: blue;
+.search-container {
+  .active {
+    color: white;
+    background-color: blue;
+  }
+
+  .navigation-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 16px;
+
+    svg {
+      margin-bottom: 8px;
+    }
+
+    .search-input {
+      width: 100%;
+    }
+  }
+
+  .content-container {
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .movies-container {
+    display: grid;
+    column-gap: 8px;
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+    margin: 0 auto 32px;
+    justify-items: center;
+  }
+
+  .results-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    border: 1px solid red;
+
+    span {
+      text-align: right;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+  }
+
+  .error-container {
+    height: 100%;
+    margin-top: 80px;
+    text-align: center;
+
+    p {
+      line-height: 30px;
+    }
+  }
+
+  @media screen and (min-width: 520px) {
+    .navigation-menu {
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: row;
+
+      svg {
+        margin-bottom: 0;
+      }
+
+      .search-input {
+        width: initial;
+      }
+    }
+
+    .movies-container {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media screen and (min-width: 767px) {
+    .movies-container {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  @media screen and (min-width: 1020px) {
+    .movies-container {
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+  }
+
+  @media screen and (min-width: 1290px) {
+    .movies-container {
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+  }
 }
