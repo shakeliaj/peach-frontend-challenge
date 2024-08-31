@@ -88,7 +88,7 @@ const Search = () => {
             {movieList?.length ? (
               <div className={styling['content-container']}>
                 <h2>{`Search results for "${searchTerm}"`}</h2>
-                <div className={styling['movies-container']}>
+                <div className='movie-grid'>
                   {getMovieCards()}
                 </div>
                 <div className={styling['results-container']}>
