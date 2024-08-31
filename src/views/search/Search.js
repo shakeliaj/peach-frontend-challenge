@@ -3,8 +3,8 @@ import { Navigate, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Pagination from '@mui/material/Pagination'
 
-import MovieCard from '../../components/movieCard/MovieCard'
 import Navigation from '../../components/navigation/Navigation'
+import MovieGrid from '../../components/movieGrid/MovieGrid'
 
 import { getMoviesBySearch } from '../../services/movieService'
 
@@ -73,12 +73,6 @@ const Search = () => {
     )
   }, [totalResults, currentPage])
 
-  const getMovieCards = useCallback(() => (
-    movieList?.map((item, index) => (
-      <MovieCard key={`${item.Title}-${index}`} {...item} />
-    ))
-  ), [movieList])
-
   return (
     <>
       {!searchTerm ? <Navigate to='/' /> : (
@@ -88,9 +82,7 @@ const Search = () => {
             {movieList?.length ? (
               <div className={styling['content-container']}>
                 <h2>{`Search results for "${searchTerm}"`}</h2>
-                <div className='movie-grid'>
-                  {getMovieCards()}
-                </div>
+                <MovieGrid movies={movieList} />
                 <div className={styling['results-container']}>
                   {getPagination()}
                   <span>{movieList?.length} of {totalResults} results</span>
