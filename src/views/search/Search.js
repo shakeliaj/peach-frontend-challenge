@@ -3,9 +3,8 @@ import { Navigate, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Pagination from '@mui/material/Pagination'
 
-import SearchInput from '../../components/searchInput/SearchInput'
 import MovieCard from '../../components/movieCard/MovieCard'
-import { ReactComponent as PeachLogo } from '../../images/peach-logo.svg'
+import Navigation from '../../components/navigation/Navigation'
 
 import { getMoviesBySearch } from '../../services/movieService'
 
@@ -52,6 +51,13 @@ const Search = () => {
     setSearchParams(searchParams)
   }, [currentPage, searchParams, setSearchParams])
 
+  useEffect(() => {
+    // When the searchTerm changes, reset the current page number to 1
+    if (searchTerm) {
+      setCurrentPage(1)
+    }
+  }, [searchTerm])
+
   const getPagination = useCallback(() => {
     const totalPages = totalResults ? Math.ceil(parseInt(totalResults) / 10) : 0
 
@@ -76,33 +82,28 @@ const Search = () => {
   return (
     <>
       {!searchTerm ? <Navigate to='/' /> : (
-        <div className={styling['search-container']}>
-          <div className={styling['navigation-menu']}>
-            <PeachLogo />
-            <SearchInput
-              defaultValue={searchTerm}
-              onSearch={() => setCurrentPage(1)}
-              className={styling['search-input']}
-            />
-          </div>
-          {movieList?.length ? (
-            <div className={styling['content-container']}>
-              <h2>{`Search results for "${searchTerm}"`}</h2>
-              <div className={styling['movies-container']}>
-                {getMovieCards()}
+        <>
+          <Navigation />
+          <div className={styling['search-container']}>
+            {movieList?.length ? (
+              <div className={styling['content-container']}>
+                <h2>{`Search results for "${searchTerm}"`}</h2>
+                <div className={styling['movies-container']}>
+                  {getMovieCards()}
+                </div>
+                <div className={styling['results-container']}>
+                  {getPagination()}
+                  <span>{movieList?.length} of {totalResults} results</span>
+                </div>
               </div>
-              <div className={styling['results-container']}>
-                {getPagination()}
-                <span>{movieList?.length} of {totalResults} results</span>
+            ) : null}
+            {errorMessage ? (
+              <div className={styling['error-container']}>
+                <p>{errorMessage}<br />Please update your search criteria and try again.</p>
               </div>
-            </div>
-          ) : null}
-          {errorMessage ? (
-            <div className={styling['error-container']}>
-              <p>{errorMessage}<br />Please update your search criteria and try again.</p>
-            </div>
-          ) : null}
-        </div >
+            ) : null}
+          </div >
+        </>
       )
       }
     </>

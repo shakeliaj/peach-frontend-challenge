@@ -2,34 +2,33 @@ import React, { useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import classNames from 'classnames'
+import { useNavigate } from 'react-router-dom'
 
 import { setSearchTerm } from '../../redux/actions'
 
 import styling from './searchInput.module.scss'
 
-const SearchInput = ({ onSearch, defaultValue, className }) => {
+const SearchInput = ({ defaultValue, className }) => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const inputRef = useRef(null)
 
   useEffect(() => {
     if (inputRef.current) {
       const listener = (event) => {
-        if (event.key === 'Enter') {
+        if (event.key === 'Enter' && inputRef?.current?.value) {
           event.stopImmediatePropagation()
 
-          dispatch(setSearchTerm(inputRef?.current?.value))
-
-          if (onSearch) {
-            onSearch()
-          }
+          dispatch(setSearchTerm(inputRef.current.value))
+          navigate('/search')
         }
       }
 
       // Add the keypress event listener to the input element to check for 'Enter' click
       inputRef.current.addEventListener('keypress', listener)
     }
-  }, [dispatch, onSearch])
+  }, [dispatch, navigate])
 
   const containerClasses = classNames(
     styling['search-input-container'],
@@ -38,19 +37,16 @@ const SearchInput = ({ onSearch, defaultValue, className }) => {
 
   return (
     <div className={containerClasses}>
-      <label>
-        <input
-          defaultValue={defaultValue}
-          ref={inputRef}
-          placeholder='Search'
-        />
-      </label>
+      <input
+        defaultValue={defaultValue}
+        ref={inputRef}
+        placeholder='Search'
+      />
     </div>
   )
 }
 
 SearchInput.propTypes = {
-  onSearch: PropTypes.func,
   defaultValue: PropTypes.string,
   className: PropTypes.string,
 }

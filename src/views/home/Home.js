@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import SearchInput from '../../components/searchInput/SearchInput'
@@ -10,7 +9,6 @@ import { resetSearchTerm } from '../../redux/actions'
 import styling from './home.module.scss'
 
 const Home = () => {
-  const navigate = useNavigate()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -20,7 +18,7 @@ const Home = () => {
   return (
     <div className={styling['home-container']}>
       <PeachLogo />
-      <SearchInput onSearch={() => navigate('/search')} />
+      <SearchInput />
     </div>
   )
 }

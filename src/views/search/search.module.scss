@@ -1,19 +1,4 @@
 .search-container {
-  .navigation-menu {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: 16px;
-
-    svg {
-      margin-bottom: 8px;
-    }
-
-    .search-input {
-      width: 100%;
-    }
-  }
-
   .content-container {
     max-width: 1300px;
     width: 100%;
@@ -66,20 +51,6 @@
   }
 
   @media screen and (min-width: 520px) {
-    .navigation-menu {
-      align-items: center;
-      justify-content: space-between;
-      flex-direction: row;
-
-      svg {
-        margin-bottom: 0;
-      }
-
-      .search-input {
-        width: initial;
-      }
-    }
-
     .movies-container {
       grid-template-columns: 1fr 1fr;
     }
