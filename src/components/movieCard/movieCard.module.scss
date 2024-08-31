@@ -1,0 +1,34 @@
+.movie-card {
+  width: 236px;
+  height: 352px;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  img,
+  div {
+    width: -webkit-fill-available;
+    height: 100%;
+    border-radius: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  img {
+    object-fit: cover;
+  }
+
+  div {
+    text-align: center;
+    padding: 0 20px;
+    color: #252528;
+  }
+}
