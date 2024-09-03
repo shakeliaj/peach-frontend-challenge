@@ -10,9 +10,7 @@ import styling from './movieGrid.module.scss'
 // Displays MovieCard components on /search and /favorites pages
 
 const MovieGrid = ({ movies }) => {
-  // State and update variables for selectedMovie
   const [selectedMovie, setSelectedMovie] = useState(null)
-  // State and update variables for opening (and closing) modal
   const [open, setOpen] = useState(false)
 
   // Function sets value of selectedMovie to the MovieCard that was clicked
