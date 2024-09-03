@@ -10,6 +10,8 @@ import { getMoviesBySearch } from '../../services/movieService'
 
 import styling from './search.module.scss'
 
+// Search view (/search)
+
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams()
 
@@ -58,6 +60,9 @@ const Search = () => {
     }
   }, [searchTerm])
 
+  // Function to return a Material UI Pagination component using the totalResults
+  // information returned in the movie search
+  // Clicking on any of the numbers updates the 'currentPage' value
   const getPagination = useCallback(() => {
     const totalPages = totalResults ? Math.ceil(parseInt(totalResults) / 10) : 0
 
@@ -73,6 +78,11 @@ const Search = () => {
     )
   }, [totalResults, currentPage])
 
+  // If no searchTerm is saved in Redux state, navigate to the Home (/) page
+  // Otherwise, show the Navigation bar and a container that includes
+  // a MovieGrid of movies that were returned as a result of the searchTerm.
+  // The conmponent includes pagination so that the user can cycle through the movies (in increments of 10)
+  // and displays an error if no movie information is returned
   return (
     <>
       {!searchTerm ? <Navigate to='/' /> : (

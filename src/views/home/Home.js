@@ -8,7 +8,7 @@ import { resetSearchTerm } from '../../redux/actions'
 
 import styling from './home.module.scss'
 
-// Home view
+// Home view (/)
 
 const Home = () => {
   const dispatch = useDispatch()
