@@ -8,6 +8,8 @@ import { resetSearchTerm } from '../../redux/actions'
 
 import styling from './home.module.scss'
 
+// Home view
+
 const Home = () => {
   const dispatch = useDispatch()
 
@@ -15,6 +17,7 @@ const Home = () => {
     dispatch(resetSearchTerm())
   }, [dispatch])
 
+  // Returns a container that includes the Peach Finance logo and a SearchInput component
   return (
     <div className={styling['home-container']}>
       <PeachLogo />

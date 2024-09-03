@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 
 import styling from './movieCard.module.scss'
 
+// MovieCard component
+// Displayed in grid on /search page
+
 const MovieCard = ({
   Poster: poster, // movie image url
   Title: title, // movie title
@@ -10,8 +13,11 @@ const MovieCard = ({
   imdbID: id,
   handleCardClick,
 }) => {
+  // Variable is true if there is no image available for the movie, false otherwise
   const imageNotAvailable = useMemo(() => poster === 'N/A', [poster])
 
+  // Return container with movie image
+  // If the image is not available, return default container
   return (
     <div
       className={styling['movie-card']}
