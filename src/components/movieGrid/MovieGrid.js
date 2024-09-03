@@ -10,13 +10,13 @@ import styling from './movieGrid.module.scss'
 // Displays MovieCard components on /search and /favorites pages
 
 const MovieGrid = ({ movies }) => {
-  const [selectedMovie, setSelectedMovie] = useState(null)
+  const [selectedMovieId, setSelectedMovieId] = useState('')
   const [open, setOpen] = useState(false)
 
-  // Function sets value of selectedMovie to the MovieCard that was clicked
-  // and opens the modal
+  // Function sets value of selectedMovieId to the imdbID associated with the
+  // MovieCard that was clicked and opens the modal
   const handleCardClick = item => {
-    setSelectedMovie(item)
+    setSelectedMovieId(item?.imdbID)
     setOpen(true)
   }
 
@@ -38,7 +38,7 @@ const MovieGrid = ({ movies }) => {
         {getGridMovies()}
       </div>
       <MovieModal
-        selectedMovie={selectedMovie}
+        selectedMovieId={selectedMovieId}
         closeModal={() => setOpen(false)}
         isOpen={open}
       />
