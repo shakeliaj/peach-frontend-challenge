@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { Navigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import Pagination from '@mui/material/Pagination'
 
@@ -21,6 +21,8 @@ const Search = () => {
   const [errorMessage, setErrorMessage] = useState('')
 
   const searchTerm = useSelector(state => state?.searchTerm)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const getMovies = async () => {
@@ -57,8 +59,11 @@ const Search = () => {
     // When the searchTerm changes, reset the current page number to 1
     if (searchTerm) {
       setCurrentPage(1)
+    } else {
+      // If no searchTerm is saved in Redux state, navigate to the Home (/) page
+      navigate('/')
     }
-  }, [searchTerm])
+  }, [searchTerm, navigate])
 
   // Function to return a Material UI Pagination component using the totalResults
   // information returned in the movie search
@@ -78,36 +83,30 @@ const Search = () => {
     )
   }, [totalResults, currentPage])
 
-  // If no searchTerm is saved in Redux state, navigate to the Home (/) page
-  // Otherwise, show the Navigation bar and a container that includes
+  // Show the Navigation bar and a container that includes
   // a MovieGrid of movies that were returned as a result of the searchTerm.
-  // The conmponent includes pagination so that the user can cycle through the movies (in increments of 10)
+  // The component includes pagination so that the user can cycle through the movies (in increments of 10)
   // and displays an error if no movie information is returned
   return (
     <>
-      {!searchTerm ? <Navigate to='/' /> : (
-        <>
-          <Navigation />
-          <div className={styling['search-container']}>
-            {movieList?.length ? (
-              <div className={styling['content-container']}>
-                <h2>{`Search results for "${searchTerm}"`}</h2>
-                <MovieGrid movies={movieList} />
-                <div className={styling['results-container']}>
-                  {getPagination()}
-                  <span>{movieList?.length} of {totalResults} results</span>
-                </div>
-              </div>
-            ) : null}
-            {errorMessage ? (
-              <div className={styling['error-container']}>
-                <p>{errorMessage}<br />Please update your search criteria and try again.</p>
-              </div>
-            ) : null}
-          </div >
-        </>
-      )
-      }
+      <Navigation />
+      <div className={styling['search-container']}>
+        {movieList?.length ? (
+          <div className={styling['content-container']}>
+            <h2>{`Search results for "${searchTerm}"`}</h2>
+            <MovieGrid movies={movieList} />
+            <div className={styling['results-container']}>
+              {getPagination()}
+              <span>{movieList?.length} of {totalResults} results</span>
+            </div>
+          </div>
+        ) : null}
+        {errorMessage ? (
+          <div className={styling['error-container']}>
+            <p>{errorMessage}<br />Please update your search criteria and try again.</p>
+          </div>
+        ) : null}
+      </div >
     </>
   )
 }
