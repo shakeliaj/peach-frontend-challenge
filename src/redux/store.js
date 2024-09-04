@@ -13,13 +13,16 @@ import storage from 'redux-persist/lib/storage'
 
 import rootReducer from './reducers'
 
+// Config for persisting Redux state
 const persistConfig = {
   key: 'root',
   storage,
 }
 
+// Persisted reducer to use in store configuration
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
+// Configured Redux store object
 export const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
@@ -29,4 +32,6 @@ export const store = configureStore({
       },
     })
 })
+
+// Persisted store state
 export const persistor = persistStore(store)
