@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import MovieCard from '../movieCard/MovieCard'
-import MovieModal from '../movieModal/MovieModal'
+import MovieModal from '../modals/movieModal/MovieModal'
 
 import styling from './movieGrid.module.scss'
 
