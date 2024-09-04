@@ -9,7 +9,7 @@ import styling from './movieGrid.module.scss'
 // MovieGrid component
 // Displays MovieCard components on /search and /favorites pages
 
-const MovieGrid = ({ movies }) => {
+const MovieGrid = ({ movies = [] }) => {
   const [selectedMovieId, setSelectedMovieId] = useState('')
   const [open, setOpen] = useState(false)
 
