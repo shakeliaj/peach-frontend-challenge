@@ -112,7 +112,9 @@ const MovieModal = ({ selectedMovieId, closeModal, isOpen }) => {
             <div
               className={styling['movie-image']}
               style={modalImageNotAvailable ? {} : { backgroundImage: `url(${movieDetails?.Poster})` }}
-            />
+            >
+              {modalImageNotAvailable ? 'Image not Available' : null}
+            </div>
             <div className={styling['details-container']}>
               <h1>{movieDetails?.Title}</h1>
               {movieDetails?.Plot !== 'N/A' ? (
