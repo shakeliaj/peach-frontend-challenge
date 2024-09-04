@@ -17,8 +17,12 @@
       display: flex;
       justify-content: center;
       color: black;
-      padding-top: 30%;
       font-size: 24px;
+
+      p {
+        padding-top: 30%;
+        margin: 0;
+      }
     }
 
     .details-container {
