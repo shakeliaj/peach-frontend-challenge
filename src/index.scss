@@ -8,6 +8,10 @@ body {
   padding: 0 20px;
   background-color: #252528;
   color: white;
+
+  .MuiModal-backdrop {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
 }
 
 code {

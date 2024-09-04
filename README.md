@@ -25,7 +25,11 @@ I chose to use the following external packages when building this application.
 
 __Notes:__
 
-I spent a lot of time working on this so for the most part, I believe I had the opportunity to clean up the majority of the things that came to mind while developing this, but one of the improvements I would surely make is fixing the aspect ratio of the images when the modal is open so that the images show more clearly. Another thing I'd do is make the pagination & query params on the **/search** page bi-directionally functional.
+I spent a lot of time working on this so for the most part, I believe I had the opportunity to clean up the majority of the things that came to mind while developing this, but some of the improvements I would make are:
+- fixing the aspect ratio of the images when the modal is open so that the images show more clearly,
+- making the pagination & query params on the **/search** page bi-directionally functional,
+- potentially using styled-components for a little more dynamism,
+- and updating the rating stars UI to be more accurate (show half and 3/4 stars for decimal ratings)
 
 
 
