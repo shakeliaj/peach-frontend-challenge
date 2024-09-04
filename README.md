@@ -30,7 +30,8 @@ I spent a lot of time working on this so for the most part, I believe I had the 
 - making the pagination & query params on the **/search** page bi-directionally functional,
 - potentially using styled-components for a little more dynamism,
 - updating the rating stars UI to be more accurate (show half and 3/4 stars for decimal ratings),
-- and writing some reusable SCSS (mixins, variables, etc.)
+- writing some reusable SCSS (mixins, variables, etc.),
+- and TESTING! I'd write unit tests for the services and some E2E tests for the UI functionality
 
 
 
